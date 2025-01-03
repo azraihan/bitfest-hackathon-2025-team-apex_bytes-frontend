@@ -16,6 +16,10 @@ import { styled } from "@mui/system";
 // components
 import CustomRoundedButton from "../misc/CustomRoundedButton";
 
+import { AiOutlineTranslation } from "react-icons/ai";
+
+import { TITLE_THICK, TITLE,CONTENT } from "../../values/Fonts";
+
 // Styled TextField
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
@@ -90,8 +94,8 @@ const TranslationComponent = () => {
 
   return (
     <Box sx={{ p: 4, maxWidth: 800, margin: "auto", textAlign: "center" }}>
-      <Typography variant="h5" gutterBottom>
-        Translation Component
+      <Typography variant="h5" gutterBottom sx={{fontSize: 40, fontWeight: 'bold', fontFamily: CONTENT}}>
+      বাংlish Transliteration <AiOutlineTranslation/>
       </Typography>
       <Grid container spacing={2}>
         {/* Input Box */}

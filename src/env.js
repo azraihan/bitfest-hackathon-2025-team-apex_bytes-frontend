@@ -8,4 +8,4 @@ export const CHATBOT_URI="https://4233-103-175-130-28.ngrok-free.app/api/chat"
 
 // export const PROBLEMS_SERVICE_URI="https://8a3b-103-175-131-30.ngrok-free.app/api/problems"
 
-export const API_ENDPOINT = "https://fastapi-one-omega.vercel.app"
+export const API_ENDPOINT = "http://127.0.0.1:8000"
