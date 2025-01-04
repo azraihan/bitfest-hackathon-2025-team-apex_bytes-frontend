@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import {
   TextField,
-  Button,
   Typography,
   Box,
   IconButton,
   Grid,
 } from "@mui/material";
-import MicIcon from "@mui/icons-material/Mic";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";

@@ -28,7 +28,7 @@ function LandingPage({ setAuth, setUserType, setUserID }) {
   const paths = [
     "/",
     //"/about",
-    "/section_1",
+    // "/section_1",
     // "/kids",
     "/getStarted",
   ]; //always write the paths in camelcase
@@ -38,7 +38,7 @@ function LandingPage({ setAuth, setUserType, setUserID }) {
   //for footer
   const quickLinks = [
     //"About",
-    "Section_1",
+    // "Section_1",
     //"Kids",
     "Get Started",
   ];
@@ -73,7 +73,7 @@ function LandingPage({ setAuth, setUserType, setUserID }) {
         <Route path="/" element={<Outlet />}>
           <Route path="/" element={<Home />} />
           {/* <Route path="/about" element={<About />} /> */}
-          <Route
+          {/* <Route
             path="/section_1"
             element={
               <Section_1
@@ -83,7 +83,7 @@ function LandingPage({ setAuth, setUserType, setUserID }) {
                 setIsLoading={setIsLoading}
               />
             }
-          />
+          /> */}
           {/* <Route path="/kids" element={<Kids />} /> */}
           <Route
             exact
