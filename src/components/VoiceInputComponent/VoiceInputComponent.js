@@ -46,7 +46,7 @@ const VoiceInputComponent = ({ setTranslatedText }) => {
   };
 
   const translateToBengali = (text) => {
-    const apiKey = "AIzaSyDsx5YindNt-lKFHVjetNClGqWq9fkqohE"; // Replace with your API key
+    const apiKey = "."; // Replace with your API key
     const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
 
     fetch(url, {
