@@ -37,18 +37,18 @@ ChartJS.register(
 const Dashboard = () => {
   // Data for charts
   const barData = {
-    labels: ["January", "February", "March"],
+    labels: [".", ".", "."],
     datasets: [
       {
         label: "Words Translated",
-        data: [300, 500, 400],
+        data: [10, 20, 40],
         backgroundColor: "rgba(75,192,192,0.6)",
       },
     ],
   };
 
   const radarData = {
-    labels: ["Adventure", "Mystery", "Sci-Fi", "Romance"],
+    labels: ["Bengali", "বাংlish", "English", "."],
     datasets: [
       {
         label: "Stories",
@@ -59,11 +59,11 @@ const Dashboard = () => {
   };
 
   const lineData = {
-    labels: ["Week 1", "Week 2", "Week 3"],
+    labels: ["PDF", "Normal Chat", "Stories"],
     datasets: [
       {
         label: "Chat Interactions",
-        data: [10, 15, 20],
+        data: [5, 7, 3],
         borderColor: "rgba(54,162,235,1)",
         fill: false,
       },
@@ -71,22 +71,22 @@ const Dashboard = () => {
   };
 
   const pieData = {
-    labels: ["Group A", "Group B", "Group C"],
+    labels: ["English", "Bengali", "বাংlish"],
     datasets: [
       {
         label: "Collaboration",
-        data: [40, 30, 30],
+        data: [1, 5, 3],
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       },
     ],
   };
 
   const doughnutData = {
-    labels: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+    labels: ["English", "Bengali", "বাংlish", "ChatBot"],
     datasets: [
       {
         label: "Voice Interactions",
-        data: [12, 19, 3, 5],
+        data: [1, 10, 5, 7],
         backgroundColor: ["#4BC0C0", "#FF9F40", "#FF6384", "#36A2EB"],
       },
     ],

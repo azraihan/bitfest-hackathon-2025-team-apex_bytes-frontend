@@ -13,33 +13,36 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import { styled } from "@mui/system";
 
+import VoiceInputComponent from "../VoiceInputComponent/VoiceInputComponent";
+
 // components
 import CustomRoundedButton from "../misc/CustomRoundedButton";
 
 import { AiOutlineTranslation } from "react-icons/ai";
 
-import { TITLE_THICK, TITLE,CONTENT } from "../../values/Fonts";
+import { TITLE_THICK, TITLE, CONTENT } from "../../values/Fonts";
+
+import { API_ENDPOINT } from "../../env";
 
 // Styled TextField
 const StyledTextField = styled(TextField)(({ theme }) => ({
-  '& .MuiOutlinedInput-root': {
-    borderRadius: '12px', // Rounded edges
-    backgroundColor: '#f5f5f5', // Background color of the text field
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "12px", // Rounded edges
+    backgroundColor: "#f5f5f5", // Background color of the text field
   },
-  '& .MuiOutlinedInput-root:hover': {
-    backgroundColor: '#e8e8e8', // Background color on hover
+  "& .MuiOutlinedInput-root:hover": {
+    backgroundColor: "#e8e8e8", // Background color on hover
   },
-  '& .MuiOutlinedInput-notchedOutline': {
-    borderColor: '#ccc', // Default border color
+  "& .MuiOutlinedInput-notchedOutline": {
+    borderColor: "#ccc", // Default border color
   },
-  '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    borderColor: 'red', // Border color when focused
+  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "red", // Border color when focused
   },
-  '& .MuiInputLabel-root.Mui-focused': {
-    color: 'red', // Label color when focused
+  "& .MuiInputLabel-root.Mui-focused": {
+    color: "red", // Label color when focused
   },
 }));
-
 
 // Styled Mic Button
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
@@ -51,10 +54,46 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
+const generateContent = async (
+  banglish_text,
+  setOutputText,
+  setIsGeneratingOutput
+) => {
+  try {
+    setIsGeneratingOutput(true)
+    const res = await fetch(`${API_ENDPOINT}/content/generate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //'token': localStorage.token
+      },
+      body: JSON.stringify({
+        title: "string",
+        banglish_text: banglish_text,
+        bangla_text: "string",
+        visibility: "private",
+        selected_font: "string",
+      }),
+    });
+
+    const parseRes = await res.json();
+
+    if (res.ok) {
+      setOutputText(parseRes.bangla_text)
+    }
+  } catch (err) {
+    console.error("Error fetching /*...*/", err.message);
+  } finally {
+    setIsGeneratingOutput(false)
+  }
+};
+
 const TranslationComponent = () => {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
   const characterLimit = 5000;
+
+  const [isGeneratingOutput, setIsGeneratingOutput] = useState(false);
 
   // Voice input setup
   const { transcript, resetTranscript, listening } = useSpeechRecognition();
@@ -68,8 +107,10 @@ const TranslationComponent = () => {
 
   const handleTranslate = () => {
     // Simulate translation. Replace this with your translation logic/API call.
-    const translatedText = fakeTranslate(inputText);
-    setOutputText(translatedText);
+    // const translatedText = fakeTranslate(inputText);
+    // setOutputText(translatedText);
+    generateContent(inputText, setOutputText, setIsGeneratingOutput)
+
   };
 
   const handleVoiceInput = () => {
@@ -94,8 +135,12 @@ const TranslationComponent = () => {
 
   return (
     <Box sx={{ p: 4, maxWidth: 800, margin: "auto", textAlign: "center" }}>
-      <Typography variant="h5" gutterBottom sx={{fontSize: 40, fontWeight: 'bold', fontFamily: CONTENT}}>
-      বাংlish Transliteration <AiOutlineTranslation/>
+      <Typography
+        variant="h5"
+        gutterBottom
+        sx={{ fontSize: 40, fontWeight: "bold", fontFamily: CONTENT }}
+      >
+        বাংlish Transliteration <AiOutlineTranslation />
       </Typography>
       <Grid container spacing={2}>
         {/* Input Box */}
@@ -131,12 +176,16 @@ const TranslationComponent = () => {
 
       {/* Microphone and Translate Buttons */}
       <Box sx={{ mt: 2 }}>
-        <StyledIconButton onClick={handleVoiceInput}>
+        {/* <StyledIconButton onClick={handleVoiceInput}>
           <MicIcon />
         </StyledIconButton>
         <Typography variant="caption" display="block" gutterBottom>
           {listening ? "Listening..." : "Click the mic to start voice input"}
-        </Typography>
+        </Typography> */}
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft:10}}>
+        <VoiceInputComponent setTranslatedText={setInputText} />
+        </div>
+        
         {/* <Button
           variant="contained"
           color="primary"
@@ -151,6 +200,7 @@ const TranslationComponent = () => {
             label={"Translate"}
             backgroundColor="#334B71"
             textColor="white"
+            disabled={isGeneratingOutput}          
           />
         </div>
       </Box>
